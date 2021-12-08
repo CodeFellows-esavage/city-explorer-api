@@ -36,7 +36,7 @@ function handleGetWeather(request, response) {
     } else {
         //send some sort of error
         console.log('no locations found with that name');
-        return response.status(999).send({
+        return response.status(204).send({
             message: 'no locations found with that name'
         });
     }
