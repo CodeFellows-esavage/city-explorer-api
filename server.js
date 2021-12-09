@@ -55,8 +55,7 @@ async function handleGetWeather(request, response) {
 async function handleGetMovie(request, response) {
     //Jack+Reacher format for multiple strings
     const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${request.query.loc}`;
-    console.log(request.query.loc);
-    console.log(url);
+
     try{
         const result = await axios.get(url);
         const movieObjArr = result.data.results.map(movieObj => new Movie(movieObj));
