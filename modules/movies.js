@@ -8,7 +8,7 @@ class Movie {
         this.overview = obj.overview;
         this.average_votes = obj.vote_average;
         this.total_votes = obj.vote_count;
-        this.image_url = `https://image.tmdb.org/t/p/w500/${obj.poster_path}`;
+        this.image_url = obj.poster_path ? `https://image.tmdb.org/t/p/w500/${obj.poster_path}` : `/images/catmovieposter.jpg`;
         this.popularity = obj.popularity;
         this.released_on = obj.release_date;
     }
@@ -20,6 +20,7 @@ async function handleGetMovies(request, response) {
     try{
         const result = await axios.get(url);
         const movieObjArr = result.data.results.map(movieObj => new Movie(movieObj));
+        console.log(movieObjArr);
         response.send(movieObjArr);
     } catch (error) {
         response.status(204).send({
