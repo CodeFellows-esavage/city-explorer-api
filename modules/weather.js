@@ -16,12 +16,11 @@ async function handleGetWeather(request, response) {
     const url = `http://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&key=${process.env.WEATHER_API_KEY}&units=I&days=12`;
     const key = `weather-${lat}|${lon}`;
 
-    //check if there is anything in the cache
-    if (cache[key] && (cache[key].timestamp >= Date.now() - 3600000)){
-        console.log('cache hit');
+    if (cache[key] && (cache[key].timestamp >= Date.now() - 3600000)){//3600000 milliseconds in an hour
+        console.log('cache hit - weather');
         response.status(200).send(cache[key].data);
     } else {
-        console.log('cache.miss');
+        console.log('cache miss - weather');
         cache[key] = {};
         cache[key].timestamp = Date.now();
 
